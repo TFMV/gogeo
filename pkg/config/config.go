@@ -1,13 +1,11 @@
 package config
 
 import (
-	"log"
-
 	"github.com/spf13/viper"
 )
 
 type Config struct {
-	GoogleMapsAPIKey string
+	GoogleMapsAPIKey string `mapstructure:"google_maps_api_key"`
 }
 
 func LoadConfig() (Config, error) {
@@ -16,11 +14,11 @@ func LoadConfig() (Config, error) {
 	viper.AddConfigPath(".")
 	viper.AutomaticEnv()
 
+	var cfg Config
 	if err := viper.ReadInConfig(); err != nil {
-		log.Fatalf("Error reading config file: %s", err)
+		return cfg, err
 	}
 
-	var cfg Config
 	err := viper.Unmarshal(&cfg)
 	return cfg, err
 }

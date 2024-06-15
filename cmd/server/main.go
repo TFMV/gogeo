@@ -3,9 +3,10 @@ package main
 import (
 	"log"
 
+	"github.com/TFMV/gogeo/internal/handlers"
+	services "github.com/TFMV/gogeo/internal/services"
+	"github.com/TFMV/gogeo/pkg/config"
 	"github.com/gin-gonic/gin"
-	"github.com/tfmv/gogeo/internal/handlers"
-	"github.com/tfmv/gogeo/pkg/config"
 )
 
 func main() {
@@ -16,7 +17,7 @@ func main() {
 	}
 
 	// Initialize Google Maps client
-	mapsClient, err := handlers.NewMapsClient(cfg.GoogleMapsAPIKey)
+	mapsClient, err := services.NewMapsClient(cfg.GoogleMapsAPIKey)
 	if err != nil {
 		log.Fatalf("Could not create maps client: %v", err)
 	}
